@@ -1,0 +1,30 @@
+@import 'bootstrap/scss/bootstrap';
+
+.bin {
+    margin: 20px 300px;
+    padding: 20px;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    background-color: rgba(33, 37, 41, 0.1);
+}
+
+.homeBin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 250px;
+
+    h1 {
+        font-size: 60px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+}
+
+.accCenter {
+    margin-top: 250px;
+}
+
+.nameSum {
+    padding-top: 5px;
+}
