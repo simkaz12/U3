@@ -1,11 +1,23 @@
 @import 'bootstrap/scss/bootstrap';
 
+body {
+    background-color: #ddd;
+}
+
 .bin {
     margin: 20px 300px;
     padding: 20px;
     border: var(--bs-border-width) solid var(--bs-border-color);
     border-radius: var(--bs-border-radius);
     background-color: rgba(33, 37, 41, 0.1);
+}
+
+.confirm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
 }
 
 .homeBin {
@@ -27,4 +39,12 @@
 
 .nameSum {
     padding-top: 5px;
+}
+
+.menu {
+    background-color: #ccc;
+}
+
+table {
+    border-radius: 15px;
 }

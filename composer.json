@@ -14,5 +14,7 @@
             "email": "sksimkaz8@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "fzaninotto/faker": "^1.5"
+    }
 }

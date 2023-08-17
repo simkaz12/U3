@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <nav class="navbar navbar-expand-lg menu">
     <div class="container-fluid">
       <a class="navbar-brand">U3 Bank</a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -23,7 +23,7 @@
             <a class="nav-link" href="<?= URL . '/acc' ?>">Account</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= URL . '/create' ?>">Open New Acc</a>
+            <a class="nav-link" href="<?= URL . '/create' ?>">Open New Account</a>
           </li>
         </ul>
         <a class="btn btn-outline-success">Login</a>

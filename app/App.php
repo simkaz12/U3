@@ -32,6 +32,27 @@ class App
         if ($method == 'GET' && count($uri) == 1 && $uri[0] == 'acc') {
             return (new AC)->acc();
         }
+        if ($method == 'GET' && count($uri) == 2 && $uri[0] == 'more') {
+            return (new AC)->more($uri[1]);
+        }
+        if ($method == 'GET' && count($uri) == 2 && $uri[0] == 'add') {
+            return (new AC)->add($uri[1]);
+        }
+        if ($method == 'GET' && count($uri) == 2 && $uri[0] == 'withdraw') {
+            return (new AC)->withdraw($uri[1]);
+        }
+        if ($method == 'GET' && count($uri) == 2 && $uri[0] == 'delete') {
+            return (new AC)->delete($uri[1]);
+        }
+        if ($method == 'POST' && count($uri) == 2 && $uri[0] == 'plus') {
+            return (new AC)->plus($uri[1], $_POST['plus']);
+        }
+        if ($method == 'POST' && count($uri) == 2 && $uri[0] == 'minus') {
+            return (new AC)->minus($uri[1], $_POST['minus']);
+        }
+        if ($method == 'POST' && count($uri) == 2 && $uri[0] == 'destroy') {
+            return (new AC)->destroy($uri[1]);
+        }
 
 
 
