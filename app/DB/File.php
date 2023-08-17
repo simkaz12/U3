@@ -75,8 +75,12 @@ class File implements DataBase
     {
         foreach ($this->data as $key => $dataLine) {
             if ($dataLine['id'] == $id) {
-                unset($this->data[$key]);
-                return;
+                if ($this->data[$key]['sum'] == 0) {
+                    unset($this->data[$key]);
+                    return;
+                } else {
+                    return;
+                }
             }
         }
     }
