@@ -11,3 +11,18 @@ function sasId()
     $accNum = 'LT ' . $pre . $res;
     return $accNum;
 }
+
+function flash()
+{
+    $_SESSION['flash'] = $_POST;
+}
+
+function clearFlash()
+{
+    unset($_SESSION['flash']);
+}
+
+function old($field)
+{
+    return $_SESSION['flash'][$field] ?? '';
+}

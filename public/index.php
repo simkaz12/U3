@@ -1,6 +1,8 @@
 <?php
 use Acc\App;
 
+session_start();
+
 define('ROOT', __DIR__ . '/../'); //serverio path
 define('URL', 'http://u3.test'); //narsykles path
 

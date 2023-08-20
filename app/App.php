@@ -2,6 +2,9 @@
 namespace Acc;
 
 use Acc\Controllers\AccController as AC;
+use Acc\Controllers\LoginController as LC;
+use Acc\Auth;
+use Acc\Msg;
 
 class App
 {
@@ -23,6 +26,18 @@ class App
         if ($method == 'GET' && count($uri) == 1 && $uri[0] == '') {
             return (new AC)->index();
         }
+        if ($method == 'GET' && count($uri) == 1 && $uri[0] == 'login') {
+            return (new LC)->showLogin();
+        }
+        if ($method == 'POST' && count($uri) == 1 && $uri[0] == 'login') {
+            return (new LC)->login();
+        }
+        if ($method == 'POST' && count($uri) == 1 && $uri[0] == 'logout') {
+            return (new LC)->logout();
+        }
+
+
+
         if ($method == 'GET' && count($uri) == 1 && $uri[0] == 'create') {
             return (new AC)->create();
         }
@@ -69,12 +84,15 @@ class App
             extract($data);
         }
 
+        $user = Auth::user();
+        $msg = Msg::get();
         ob_start();
 
         require ROOT . 'resources/view/layout/top.php';
         require ROOT . 'resources/view/' . $path . '.php';
         require ROOT . 'resources/view/layout/bottom.php';
 
+        clearFlash();
         return ob_get_clean();
     }
 

@@ -12,6 +12,21 @@ body {
     background-color: rgba(33, 37, 41, 0.1);
 }
 
+.messages {
+    position: fixed;
+    right: 30px;
+    top: 60px;
+    z-index: 999;
+    width: 300px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: 10px;
+
+}
+
 .confirm {
     display: flex;
     justify-content: center;

@@ -3,6 +3,7 @@ namespace Acc\Controllers;
 
 use Acc\App;
 use Acc\DB\File;
+use Acc\Msg;
 
 class AccController
 {
@@ -72,7 +73,27 @@ class AccController
 
     public function store()
     {
-
+        $errors = false;
+        if (!isset($_POST['name']) || strlen($_POST['name']) < 3) {
+            Msg::add('Name must be at least 3 characters long', 'danger');
+            $errors = true;
+        }
+        if (!isset($_POST['last']) || strlen($_POST['last']) < 3) {
+            Msg::add('Last name must be at least 3 characters long', 'danger');
+            $errors = true;
+        }
+        if (!isset($_POST['password']) || strlen($_POST['password']) < 6) {
+            Msg::add('Password must be at least 3 characters long', 'danger');
+            $errors = true;
+        }
+        if (!isset($_POST['idNr']) || strlen($_POST['idNr']) < 11) {
+            Msg::add('Identification number must be 11 characters long', 'danger');
+            $errors = true;
+        }
+        if ($errors) {
+            flash();
+            return App::redirect('/create');
+        }
 
         $data = [
             'name' => $_POST['name'],
@@ -84,10 +105,10 @@ class AccController
             'month' => $_POST['month'],
             'year' => $_POST['year'],
             'idNr' => $_POST['idNr'],
-            'sasId' => $_POST['sasId'],
         ];
 
-        (new File('users'))->create($_POST);
+        (new File('users'))->create($data);
+        Msg::add('Account Created');
 
         return App::redirect('');
     }
@@ -96,6 +117,7 @@ class AccController
     {
 
         (new File('users'))->delete($id);
+        Msg::add('Account Deleted');
 
         return App::redirect('/acc');
     }
@@ -117,6 +139,7 @@ class AccController
         ];
 
         (new File('users'))->plus($id, $data, $plus);
+        Msg::add('Funds Added');
 
         return App::redirect('/acc');
     }
@@ -138,6 +161,7 @@ class AccController
         ];
 
         (new File('users'))->minus($id, $data, $minus);
+        Msg::add('Funds Withdrawn');
 
         return App::redirect('/acc');
     }

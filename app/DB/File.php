@@ -30,6 +30,7 @@ class File implements DataBase
         $data['sasId'] = sasId();
         $data['sum'] = 0;
         $data['password'] = md5($data['password']);
+        $data['role'] = 'user';
         $this->data[] = $data;
     }
 
