@@ -21,10 +21,9 @@ class LoginController
         $email = $_POST['email'];
         $password = $_POST['password'];
         if (Auth::attempt($email, $password)) {
-            Msg::add('Loged In');
-            return App::redirect('');
+            return App::redirect('/');
         } else {
-            return App::redirect('login');
+            return App::redirect('/login');
         }
     }
 

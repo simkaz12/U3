@@ -8,11 +8,9 @@ class Auth
 
     public static function attempt($email, $password): bool
     {
-
         $users = (new File('users'))->showAll();
         foreach ($users as $user) {
             if ($user['email'] == $email && $user['password'] == md5($password)) {
-
                 $_SESSION['logged_in'] = true;
                 $_SESSION['user'] = $user;
                 return true;
