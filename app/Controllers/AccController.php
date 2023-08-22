@@ -35,11 +35,11 @@ class AccController
     }
     public function more($id)
     {
-        $user = (new File('users'))->show($id);
+        $acc = (new File('users'))->show($id);
 
         return App::view('more', [
             'title' => 'Account',
-            'user' => $user,
+            'acc' => $acc,
         ]);
     }
     public function add($id)
@@ -48,7 +48,7 @@ class AccController
 
         return App::view('add', [
             'title' => 'Add Funds',
-            'user' => $user,
+            'acc' => $user,
         ]);
     }
     public function withdraw($id)
@@ -57,7 +57,7 @@ class AccController
 
         return App::view('withdraw', [
             'title' => 'Withdraw Funds',
-            'user' => $user,
+            'acc' => $user,
         ]);
     }
     public function delete($id)
@@ -66,7 +66,7 @@ class AccController
 
         return App::view('delete', [
             'title' => 'Confirm Deletion',
-            'user' => $user,
+            'acc' => $user,
         ]);
     }
 
@@ -115,52 +115,71 @@ class AccController
 
     public function destroy($id)
     {
+        $user = (new File('users'))->show($id);
 
-        (new File('users'))->delete($id);
-        Msg::add('Account Deleted');
+        if ($user['sum'] == 0) {
 
-        return App::redirect('/acc');
+            (new File('users'))->delete($id);
+
+            Msg::add('Account Deleted');
+            return App::redirect('/acc');
+        } else {
+            Msg::add('Account with funds cannot be deleted', 'danger');
+            return App::redirect('/acc');
+        }
     }
-    public function plus($id, $plus)
+    public function plus($id)
     {
+
+        $user = (new File('users'))->show($id);
+
         $data = [
-            'name' => $_POST['name'],
-            'last' => $_POST['last'],
-            'email' => $_POST['email'],
-            'password' => $_POST['password'],
-            'sex' => $_POST['sex'],
-            'day' => $_POST['day'],
-            'month' => $_POST['month'],
-            'year' => $_POST['year'],
-            'idNr' => $_POST['idNr'],
-            'sum' => $_POST['sum'],
-            'id' => $_POST['id'],
-            'sasId' => $_POST['sasId'],
+            'name' => $user['name'],
+            'last' => $user['last'],
+            'email' => $user['email'],
+            'password' => $user['password'],
+            'sex' => $user['sex'],
+            'day' => $user['day'],
+            'month' => $user['month'],
+            'year' => $user['year'],
+            'idNr' => $user['idNr'],
+            'sum' => $user['sum'] + $_POST['plus'],
+            'id' => $user['id'],
+            'sasId' => $user['sasId'],
         ];
 
-        (new File('users'))->plus($id, $data, $plus);
+        (new File('users'))->update($id, $data);
         Msg::add('Funds Added');
 
         return App::redirect('/acc');
     }
-    public function minus($id, $minus)
+    public function minus($id)
     {
+        $user = (new File('users'))->show($id);
+        $suma = 0;
+
+        if ($user['sum'] - $_POST['minus'] <= 0) {
+            $suma = 0;
+        } else {
+            $suma = $user['sum'] - $_POST['minus'];
+        }
+
         $data = [
-            'name' => $_POST['name'],
-            'last' => $_POST['last'],
-            'email' => $_POST['email'],
-            'password' => $_POST['password'],
-            'sex' => $_POST['sex'],
-            'day' => $_POST['day'],
-            'month' => $_POST['month'],
-            'year' => $_POST['year'],
-            'idNr' => $_POST['idNr'],
-            'sum' => $_POST['sum'],
-            'id' => $_POST['id'],
-            'sasId' => $_POST['sasId'],
+            'name' => $user['name'],
+            'last' => $user['last'],
+            'email' => $user['email'],
+            'password' => $user['password'],
+            'sex' => $user['sex'],
+            'day' => $user['day'],
+            'month' => $user['month'],
+            'year' => $user['year'],
+            'idNr' => $user['idNr'],
+            'sum' => $suma,
+            'id' => $user['id'],
+            'sasId' => $user['sasId'],
         ];
 
-        (new File('users'))->minus($id, $data, $minus);
+        (new File('users'))->update($id, $data);
         Msg::add('Funds Withdrawn');
 
         return App::redirect('/acc');

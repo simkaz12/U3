@@ -16,26 +16,26 @@
                     <tr>
                         <th scope="row"></th>
                         <td>
-                            <?= $user['name'] ?>
-                            <?= $user['last'] ?>
+                            <?= $acc['name'] ?>
+                            <?= $acc['last'] ?>
                         </td>
                         <td>
-                            <?= $user['idNr'] ?>
+                            <?= $acc['idNr'] ?>
                         </td>
                         <td colspan="2">
-                            <?= $user['sasId'] ?>
+                            <?= $acc['sasId'] ?>
                         </td>
                         <td><b>
-                                <?= $user['sum'] ?>
+                                <?= $acc['sum'] ?>
                             </b>&euro;</td>
                     </tr>
                     <tr>
                         <th scope="row"></th>
                         <td colspan="5">
-                            <a href="<?= URL . '/add/' . $user['id'] ?>"" class=" btn btn-outline-success">Add</a>
-                            <a href="<?= URL . '/withdraw/' . $user['id'] ?>"
+                            <a href="<?= URL . '/add/' . $acc['id'] ?>"" class=" btn btn-outline-success">Add</a>
+                            <a href="<?= URL . '/withdraw/' . $acc['id'] ?>"
                                 class="btn btn-outline-secondary">Withdraw</a>
-                            <a href="<?= URL . '/delete/' . $user['id'] ?>" class="btn btn-outline-danger">Delete</a>
+                            <a href="<?= URL . '/delete/' . $acc['id'] ?>" class="btn btn-outline-danger">Delete</a>
                         </td>
                     </tr>
                 </tbody>

@@ -1,25 +1,15 @@
 <?php
 
-use Faker\Factory as Faker;
-
-require __DIR__ . '/../vendor/autoload.php';
-
-$faker = Faker::create();
-
-$users = [];
-
-
-
-$users[] = [
+$users = [
     [
-        'id' => rand(100000000, 999999999),
-        'name' => $faker->name($gender = 'male' | 'female'),
-        'last' => $faker->lastName,
+        'id' => 999999999,
+        'name' => 'admin',
+        'last' => 'admin',
         'email' => 'admin@email.com',
-        'password' => md5('adminas'),
-        'sex' => rand(0, 1) ? 'male' : 'female',
-        'idNr' => 11111111111,
-        'sasId' => 'LT111111112222222222',
+        'password' => md5('123'),
+        'sex' => 'Male',
+        'idNr' => 12312312312,
+        'sasId' => 'LT 013122632062259566',
         'day' => rand(1, 31),
         'month' => rand(1, 12),
         'year' => rand(1945, 2023),
@@ -27,14 +17,14 @@ $users[] = [
         'role' => 'admin',
     ],
     [
-        'id' => rand(100000000, 999999999),
-        'name' => $faker->name($gender = 'male' | 'female'),
-        'last' => $faker->lastName,
-        'email' => 'kebas@email.com',
-        'password' => md5('123456'),
-        'sex' => rand(0, 1) ? 'male' : 'female',
-        'idNr' => 11111111111,
-        'sasId' => 'LT111111112222222222',
+        'id' => 999219999,
+        'name' => 'antras',
+        'last' => 'antras',
+        'email' => 'admsdsdin@email.com',
+        'password' => md5('123'),
+        'sex' => 'Male',
+        'idNr' => 12312312312,
+        'sasId' => 'LT 013122632062259566',
         'day' => rand(1, 31),
         'month' => rand(1, 12),
         'year' => rand(1945, 2023),
@@ -42,14 +32,14 @@ $users[] = [
         'role' => 'user',
     ],
     [
-        'id' => rand(100000000, 999999999),
-        'name' => $faker->name($gender = 'male' | 'female'),
-        'last' => $faker->lastName,
-        'email' => 'ponas@email.com',
-        'password' => md5('123456'),
-        'sex' => rand(0, 1) ? 'male' : 'female',
-        'idNr' => 11111111111,
-        'sasId' => 'LT111111112222222222',
+        'id' => 991119999,
+        'name' => 'trecias',
+        'last' => 'trecias',
+        'email' => 'adsdsd@email.com',
+        'password' => md5('123'),
+        'sex' => 'Male',
+        'idNr' => 12312312312,
+        'sasId' => 'LT 013122632062259566',
         'day' => rand(1, 31),
         'month' => rand(1, 12),
         'year' => rand(1945, 2023),

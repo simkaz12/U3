@@ -56,14 +56,14 @@ class App
         if ($method == 'GET' && count($uri) == 2 && $uri[0] == 'withdraw') {
             return (new AC)->withdraw($uri[1]);
         }
-        if ($method == 'GET' && count($uri) == 2 && $uri[0] == 'delete') {
-            return (new AC)->delete($uri[1]);
-        }
         if ($method == 'POST' && count($uri) == 2 && $uri[0] == 'plus') {
-            return (new AC)->plus($uri[1], $_POST['plus']);
+            return (new AC)->plus($uri[1]);
         }
         if ($method == 'POST' && count($uri) == 2 && $uri[0] == 'minus') {
-            return (new AC)->minus($uri[1], $_POST['minus']);
+            return (new AC)->minus($uri[1]);
+        }
+        if ($method == 'GET' && count($uri) == 2 && $uri[0] == 'delete') {
+            return (new AC)->delete($uri[1]);
         }
         if ($method == 'POST' && count($uri) == 2 && $uri[0] == 'destroy') {
             return (new AC)->destroy($uri[1]);
@@ -73,8 +73,8 @@ class App
 
 
 
-
-        return '404 Page not found!';
+        http_response_code(404);
+        return self::error('404');
     }
 
     public static function view($path, $data = null)
@@ -93,6 +93,18 @@ class App
         require ROOT . 'resources/view/layout/bottom.php';
 
         clearFlash();
+        return ob_get_clean();
+    }
+
+    public static function error($path)
+    {
+
+        ob_start();
+
+        require ROOT . 'resources/view/errors/' . $path . '.php';
+
+        clearFlash();
+
         return ob_get_clean();
     }
 

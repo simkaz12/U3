@@ -44,46 +44,17 @@ class File implements DataBase
             }
         }
     }
-    public function plus(int $id, array $data, int $plus): void
-    {
-        foreach ($this->data as $key => $dataLine) {
-            if ($dataLine['id'] == $id) {
-                $this->data[$key]['sum'] += $plus;
-                $this->data[$key]['id'] = $id;
-                return;
-            }
-        }
-    }
-    public function minus(int $id, array $data, int $minus): void
-    {
 
-        foreach ($this->data as $key => $dataLine) {
-
-            if ($dataLine['id'] == $id) {
-                if (($this->data[$key]['sum'] - $minus) <= 0) {
-                    $rez = 0;
-                } else {
-                    $rez = $this->data[$key]['sum'] - $minus;
-                }
-                $this->data[$key]['sum'] = $rez;
-                $this->data[$key]['id'] = $id;
-                return;
-            }
-        }
-    }
 
     public function delete(int $id): void
     {
         foreach ($this->data as $key => $dataLine) {
             if ($dataLine['id'] == $id) {
-                if ($this->data[$key]['sum'] == 0) {
-                    unset($this->data[$key]);
-                    return;
-                } else {
-                    return;
-                }
+                unset($this->data[$key]);
+                return;
             }
         }
+        return;
     }
 
     public function show(int $id): array
@@ -93,6 +64,7 @@ class File implements DataBase
                 return $dataLine;
             }
         }
+        return [];
     }
 
     public function showAll(): array
