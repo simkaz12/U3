@@ -1,8 +1,21 @@
 <?php
 
+$host = '127.0.0.1';
+$db = 'kolibris';
+$user = 'root';
+$pass = '';
+$charset = 'utf8mb4';
+
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$options = [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES => false,
+];
+$pdo = new PDO($dsn, $user, $pass, $options);
+
 $users = [
     [
-        'id' => 999999999,
         'name' => 'admin',
         'last' => 'admin',
         'email' => 'admin@email.com',
@@ -17,7 +30,6 @@ $users = [
         'role' => 'admin',
     ],
     [
-        'id' => 999219999,
         'name' => 'antras',
         'last' => 'antras',
         'email' => 'admsdsdin@email.com',
@@ -32,7 +44,6 @@ $users = [
         'role' => 'user',
     ],
     [
-        'id' => 991119999,
         'name' => 'trecias',
         'last' => 'trecias',
         'email' => 'adsdsd@email.com',
@@ -48,5 +59,13 @@ $users = [
     ]
 ];
 
-$users = json_encode($users);
-file_put_contents(__DIR__ . '/../data/accounts.json', $users);
+foreach ($users as $user) {
+    $sql = "
+        INSERT INTO accounts (name, last, email, password, sex, idNr, sasId, day, month, year, sum, role)
+        VALUES (? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? )
+    ";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$user['name'], $user['last'], $user['email'], $user['password'], $user['sex'], $user['idNr'], $user['sasId'], $user['day'], $user['month'], $user['year'], $user['sum'], $user['role']]);
+}
+
+echo 'Done' . PHP_EOL;

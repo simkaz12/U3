@@ -2,7 +2,7 @@
 namespace Acc\Controllers;
 
 use Acc\App;
-use Acc\DB\File;
+use Acc\DB\Storage;
 use Acc\Msg;
 
 class AccController
@@ -18,7 +18,7 @@ class AccController
     public function acc()
     {
 
-        $accounts = (new File('users'))->showAll();
+        $accounts = Storage::getStorage('accounts')->showAll();
 
         return App::view('acc', [
             'title' => 'Account Info',
@@ -35,7 +35,7 @@ class AccController
     }
     public function more($id)
     {
-        $acc = (new File('users'))->show($id);
+        $acc = Storage::getStorage('accounts')->show($id);
 
         return App::view('more', [
             'title' => 'Account',
@@ -44,7 +44,7 @@ class AccController
     }
     public function add($id)
     {
-        $user = (new File('users'))->show($id);
+        $user = Storage::getStorage('accounts')->show($id);
 
         return App::view('add', [
             'title' => 'Add Funds',
@@ -53,7 +53,7 @@ class AccController
     }
     public function withdraw($id)
     {
-        $user = (new File('users'))->show($id);
+        $user = Storage::getStorage('accounts')->show($id);
 
         return App::view('withdraw', [
             'title' => 'Withdraw Funds',
@@ -62,7 +62,7 @@ class AccController
     }
     public function delete($id)
     {
-        $user = (new File('users'))->show($id);
+        $user = Storage::getStorage('accounts')->show($id);
 
         return App::view('delete', [
             'title' => 'Confirm Deletion',
@@ -107,7 +107,7 @@ class AccController
             'idNr' => $_POST['idNr'],
         ];
 
-        (new File('users'))->create($data);
+        Storage::getStorage('accounts')->create($data);
         Msg::add('Account Created');
 
         return App::redirect('');
@@ -115,11 +115,11 @@ class AccController
 
     public function destroy($id)
     {
-        $user = (new File('users'))->show($id);
+        $user = Storage::getStorage('accounts')->show($id);
 
         if ($user['sum'] == 0) {
 
-            (new File('users'))->delete($id);
+            Storage::getStorage('accounts')->delete($id);
 
             Msg::add('Account Deleted');
             return App::redirect('/acc');
@@ -131,7 +131,7 @@ class AccController
     public function plus($id)
     {
 
-        $user = (new File('users'))->show($id);
+        $user = Storage::getStorage('accounts')->show($id);
 
         $data = [
             'name' => $user['name'],
@@ -148,14 +148,14 @@ class AccController
             'sasId' => $user['sasId'],
         ];
 
-        (new File('users'))->update($id, $data);
+        Storage::getStorage('accounts')->update($id, $data);
         Msg::add('Funds Added');
 
         return App::redirect('/acc');
     }
     public function minus($id)
     {
-        $user = (new File('users'))->show($id);
+        $user = Storage::getStorage('accounts')->show($id);
         $suma = 0;
 
         if ($user['sum'] - $_POST['minus'] <= 0) {
@@ -179,7 +179,7 @@ class AccController
             'sasId' => $user['sasId'],
         ];
 
-        (new File('users'))->update($id, $data);
+        Storage::getStorage('accounts')->update($id, $data);
         Msg::add('Funds Withdrawn');
 
         return App::redirect('/acc');
